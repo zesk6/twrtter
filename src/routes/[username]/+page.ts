@@ -7,7 +7,7 @@ export const load = (async ({ params }) => {
     const docRef = collection(db, "users")
     const q = query(
         docRef,
-        where( 'username' , '==', params.username),
+        where( 'handle' , '==', params.username),
         limit(1)
     )
     const snapShot =  await getDocs(q)

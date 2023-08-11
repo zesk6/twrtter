@@ -3,78 +3,94 @@
     import defaultProfile from '$lib/pictures/anime.jpg'
     import { page } from '$app/stores';
     import { userData, user} from '$lib/firebase'
-    import { db } from '$lib/firebase'
+    import { db, storage } from '$lib/firebase'
     import { arrayUnion, doc, updateDoc, writeBatch } from 'firebase/firestore'
-    
-
+    import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+    import Image from '$lib/components/image.svelte'     
 
     let count = 0;
     let visible = 0;
     let text = "";
     let beforeAfter = 80
-    let tooLong = false;
+    let previewURL: string;
+    let uploading = false; 
+    let fileUrl: string;
+    let tweeterID = crypto.randomUUID()
     function handleInput(e: any) {
+
         beforeAfter = 174.4
-        visible = 100;
-        if (count >= 249) {
-           
-           tooLong = true;
-           return;
-           
-        } else {
-            tooLong = false;
-            count = text.length
-        }
-    
+        count = text.length
     }
     async function handleSubmit(e: any){
-       const tweetId = crypto.randomUUID()
-       const tweetRef = doc(db, 'tweets', tweetId );
+       const tweetRef = doc(db, 'tweets', tweeterID );
        const userRef = doc(db, 'users', $user!.uid)
        const batch = writeBatch(db);
        batch.set(tweetRef,{
             uid: $userData?.uid,
             likes: 0,
-            photoUrl: $userData?.photoURL ?? defaultProfile,
+            UserphotoUrl: $userData?.photoURL ?? defaultProfile,
+            ActualPhoto: fileUrl ?? null, 
             timestamp: new Date().toJSON().slice(0, 10),
-            tweetId: tweetId,
+            tweetId: tweeterID,
             username: $userData?.username,
             handle: $userData?.handle,
+            text: text,
+            replys: []
+
        })
        await updateDoc(userRef, {
             tweets: arrayUnion({
-                tweetId: tweetId
+                tweetId: tweeterID
             }),
        }) 
        await batch.commit()
        text = "";
+       previewURL = ''
         
     }
 
+    async function upload(e: any){
+        uploading = true;
+        const file = e.target.files[0] 
+        previewURL = URL.createObjectURL(file);
+        const storageRef = ref(storage, `tweets/${tweeterID}/photo`  );
+        const result = await uploadBytes(storageRef, file)
+        fileUrl = await getDownloadURL(result.ref);
+        uploading = false;
+    }
 
 </script>
 
 
-<div class='w-full  border-b border-gray-700 h-{`${beforeAfter}px`} flex'>
+<div class='w-full  border-b border-gray-700 h-{`${beforeAfter}px`} flex pb-2'>
     <div class="p-2">
         <img src={$page?.data?.photoUrl ?? defaultProfile} alt="no one cares"
         class="w-[40px] rounded-full  ">
     </div>
     <form on:submit|preventDefault={handleSubmit} class="w-[400px]" >
-        <textarea maxlength="250" bind:value={text} on:input={handleInput}
-         placeholder={`so, hows ur day, ${$userData?.username ?? 'colombianCocaine'}?`} cols="30" rows="10" class=" w-[500px]  
-        bg-black  focus:border-none text-white h-20 m-4 " style="resize:none;"></textarea>
+        <textarea maxlength="250" bind:value={text} on:input={handleInput} on:focus={() => visible = 100}
+         placeholder={`so, hows ur day, ${$userData?.username ?? 'colombianCocaine'}?`} cols="30" rows="10" class=" w-[380px]  
+        bg-black focus:border-none text-white h-20 m-4 " style="resize:none;"></textarea>
+        {#if previewURL} 
+            <Image {previewURL} />
+        {/if}
         <div class="flex justify-evenly items-center w-full ">
-            <span class="text-md text-blue-500 font-semibold scale-{visible}">Everyone can reply</span>
-            <span class="text-md text-blue-500 font-semibold scale-{visible}">{count}/250</span>
-            {#if tooLong == false}
-            <input type="submit" class="rounded-full text-white font-semibold text-md p-3 bg-blue-500 scale-{visible}
-           hover:bg-blue-600 cursor-pointer" />
-            {:else}
-            
-            <button disabled type="submit" class="rounded-full text-white font-semibold text-md p-3 bg-red-500 scale-{visible}
+           <input type="file" class="scale-{visible} cursor-pointer "  name="photoURL" accept="image/png, image/jpeg, image/gif, image/webp
+           " on:change={upload} >
+           <span class="text-md text-blue-500 font-semibold scale-{visible} mr-2">{count}/250</span>
+            {#if text.length > 249}
+            <button disabled type="submit" class="rounded-full text-white font-semibold text-md p-2 bg-red-500 scale-{visible}
            hover:bg-red-600 cursor-default">Too long!</button>
-           {/if}
+            {:else if uploading}    
+            <button disabled type="submit" class="rounded-full text-white font-semibold text-md p-2 bg-red-500 scale-{visible}
+           hover:bg-red-600 cursor-default">
+            <span class="w-12 h-12 border border-white rounded-[50%] animate-spin"></span>
+                uploading
+            </button>
+            {:else}
+            <input type="submit" class="rounded-full text-white font-semibold text-md p-2 bg-blue-500 scale-{visible}
+           hover:bg-blue-600 cursor-pointer" />
+    {/if}
         </div>
     </form>
 

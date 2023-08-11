@@ -18,9 +18,9 @@
 	
 </script>
 
-<div class="w-full min-w-screen bg-black flex px-[100px]  h-full min-h-screen">
+<div class="w-full min-w-screen bg-black flex px-[100px] h-full min-h-screen">
     {#if $user}
-    <section class="w-[90px] flex flex-col items-center relative mr-3" >
+    <section class="w-[90px] flex flex-col items-center sticky  mr-3  " >
         <div class="flex justify-right h-[55px] w-full ml-8">
             <a href="/home" class=" w-[55px] text-white text-md"><img src={Logo} alt="who fucking cares" width="50px">
             </a>
@@ -51,5 +51,5 @@
     {:else}
     <h1>sign IN, mf</h1>
     {/if}
-    <main class="w-[600px] border-r border-gray-700"><slot></slot></main>
+    <main class="w-[480px] border-r border-gray-700"><slot></slot></main>
 </div>
