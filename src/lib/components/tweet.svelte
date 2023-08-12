@@ -4,7 +4,6 @@
 
     export let profilePic: any;
     export let name: string;
-    export let time: string;
     export let text: string;
     export let photo: any;
     export let replys: number;
@@ -23,12 +22,11 @@
     <div class="flex justify-start items-center">
         <a href={`/${name}`}><h2 class=" text-lg text-white font-bold font-sans hover:underline">{name}</h2></a>
         <span class="text-md text-gray-500 ml-2">{`@${handle}`}</span>
-        <span class="text-md text-gray-600 ml-2">{time}</span>
     </div>
     <div>
         <p class="text-white text-md">{text}</p>
        {#if photo}
-        <img src={photo} alt="who fucking cares" class="rounded-2xl mt-2">
+        <img src={photo} alt="who fucking cares" class="rounded-2xl mt-2" width="450px">
         {/if}
     </div>
 </div>

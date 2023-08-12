@@ -30,7 +30,7 @@
             likes: 0,
             UserphotoUrl: $userData?.photoURL ?? defaultProfile,
             ActualPhoto: fileUrl ?? null, 
-            timestamp: new Date().toJSON().slice(0, 10),
+            timestamp: new Date(),
             tweetId: tweeterID,
             username: $userData?.username,
             handle: $userData?.handle,
@@ -69,7 +69,7 @@
     </div>
     <form on:submit|preventDefault={handleSubmit} class="w-[400px]" >
         <textarea maxlength="250" bind:value={text} on:input={handleInput} on:focus={() => visible = 100}
-         placeholder={`so, hows ur day, ${$userData?.username ?? 'colombianCocaine'}?`} cols="30" rows="10" class=" w-[380px]  
+         placeholder={`Reload to see your twrrt, ${$userData?.username ?? 'colombianCocaine'}!`} cols="30" rows="10" class=" w-[380px]  
         bg-black focus:border-none text-white h-20 m-4 " style="resize:none;"></textarea>
         {#if previewURL} 
             <Image {previewURL} />

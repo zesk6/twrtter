@@ -42,8 +42,11 @@
                 alt="no one cares" class="w-[40px] rounded-full">
                 <div class="absolute scale-0 group-hover:scale-100 w-28 py-2 m-2 bg-black border-2 border-gray-400 rounded-xl
                 shadow transition duration-100 bottom-14 left-14">
-                    <a href="/logout" class='flex justify-center hover:bg-gray-700 transition duration-100'>
+                    <a href="/logout" class='flex justify-center hover:bg-gray-700 group transition duration-100 flex-col'>
                         <span class="text-white text-md font-bold m-2 ">logout</span>
+                        <span class="text-white text-[7.258762px] font-semibold mt-[3px] group "> hah you cant reach this
+                           
+                        </span>
                     </a>
                 </div> 
         </div>
@@ -51,5 +54,5 @@
     {:else}
     <h1>sign IN, mf</h1>
     {/if}
-    <main class="w-[480px] border-r border-gray-700"><slot></slot></main>
+    <main class="w-[480px] border-x border-gray-700"><slot></slot></main>
 </div>

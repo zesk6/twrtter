@@ -1,13 +1,15 @@
 import type { PageLoad } from './$types';
 import { db } from '$lib/firebase'
-import { getDocs, query, limit, collection } from 'firebase/firestore'
+import { getDocs, query, limit, collection, orderBy } from 'firebase/firestore'
 import type { QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
 
 export const load = (async () => {
     try{
     const collectionRef = collection(db, 'tweets')
     const q = query(
+        
         collectionRef, 
+        orderBy("timestamp"),
         limit(25),
     )
     const snapshot = await getDocs(q)
