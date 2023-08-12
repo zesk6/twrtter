@@ -82,4 +82,7 @@ export const userData: Readable<UserData | null> = derived(user, ($user, set) =>
   } else {
     set(null); 
   }
-});  
+}); 
+export const scroll = writable(true);
+
+

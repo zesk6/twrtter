@@ -8,6 +8,8 @@
     import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
     import Image from '$lib/components/image.svelte'     
 
+
+    let photo = false
     let count = 0;
     let visible = 0;
     let text = "";
@@ -57,6 +59,7 @@
         const result = await uploadBytes(storageRef, file)
         fileUrl = await getDownloadURL(result.ref);
         uploading = false;
+        photo = true;
     }
 
 </script>
@@ -87,6 +90,9 @@
             <span class="w-12 h-12 border border-white rounded-[50%] animate-spin"></span>
                 uploading
             </button>
+            {:else if text.length === 0 && !photo}
+            <button disabled type="submit" class="rounded-full text-white font-semibold text-md p-2 bg-red-500 scale-{visible}
+           hover:bg-red-600 cursor-default">Empty.</button>
             {:else}
             <input type="submit" class="rounded-full text-white font-semibold text-md p-2 bg-blue-500 scale-{visible}
            hover:bg-blue-600 cursor-pointer" />

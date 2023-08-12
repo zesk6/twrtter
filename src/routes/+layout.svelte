@@ -9,15 +9,23 @@
     import Tweet from '$lib/pictures/tweet.svg';
     import Logo from '$lib/pictures/twitterLogo.svg';
     import defaultProfile from '$lib/pictures/anime.jpg'
-    import { user, userData } from '$lib/firebase';
+    import { user, userData, scroll } from '$lib/firebase';
+
     function stupid(e: MouseEvent){
         e.preventDefault()
         alert("cant you see the textbox on the top of the screen? How can you see a button as small as this but not THE TEXTBOX THAT COVER THE 1/2 OF THE ENTIRE VIEWPORT")
     }
 
-	
 </script>
-
+{#if $scroll === false}
+<style>
+   html{
+        height: 100%;
+        overflow-y: hidden;
+   } 
+   
+</style>
+{/if}
 <div class="w-full min-w-screen bg-black flex px-[100px] h-full min-h-screen">
     {#if $user}
     <section class="w-[90px] flex flex-col items-center sticky  mr-3  " >

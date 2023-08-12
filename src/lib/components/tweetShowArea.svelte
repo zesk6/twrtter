@@ -4,7 +4,7 @@
     
     export let tweets: any;
 </script>
-<div id='allTweets'>
+<div id='allTweets' class="pt-2 border-t border-gray-700">
     {#if tweets}
     {#each tweets.reverse() as tweet (tweet.tweetId)}            
     <Tweet profilePic={tweet.UserphotoUrl} text={tweet.text}  name={tweet.username}
