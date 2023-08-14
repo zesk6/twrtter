@@ -52,9 +52,9 @@
     <div class="w-1/2  flex items-center justify-center hover:bg-gray-800 transition duration-100">
     <h2 class="text-white font-semibold text-md py-2 border-b-4 border-blue-500 rounded">twrrts</h2>
     </div>
-    <div class="w-1/2 p-2 flex items-center justify-center hover:bg-gray-800 transition duration-100">
+    <button class="w-1/2 p-2 flex items-center justify-center hover:bg-gray-800 transition duration-100" on:click={() =>alert('this button is a lie')}>
     <h2 class="text-white font-semibold text-md">replies</h2>
-    </div>
+    </button>
 </div>
 {#if data.hasTweets}
 <TweetShowArea tweets={data.allTweetdata}/>

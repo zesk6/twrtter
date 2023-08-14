@@ -9,9 +9,11 @@
     import { doc, getDoc } from 'firebase/firestore'
     import { scroll } from '$lib/firebase';
     import { error } from '@sveltejs/kit';
+    import Reply from '$lib/components/reply.svelte';
     export let data: PageData;
     let isReply = false;
     let userData: DocumentData | undefined
+    
     function exit(){
         scroll.set(true)
         isReply = false;
@@ -24,7 +26,9 @@
            throw error( 500, 'i do not want to live anymore, put me out of my misery') 
         }
         userData = await document.data() 
+
     })
+    console.log(data.replys)
 </script>
 <div class="flex items-center bg-black w-full  z-50 fixed">
     <a class="p-2 rounded-full bg-black hover:bg-gray-800 m-2 transition duration-100" href="/home">
@@ -66,6 +70,15 @@
         <ReplyInput exit={exit} profilePic={userData?.photoUrl} name={userData?.username} text={data.text} 
        tweetId={data.tweetId} handle={userData?.handle}/>
     {/if} 
-    <!--todo: render out the replies -->
+
+    <div id='allTweets' class="pt-2 border-t border-gray-700">
+        {#if data.replys}
+        {#each data.replys.reverse() as reply (reply.replyID)}            
+        <Reply text={reply.text}  
+        photo={reply.ActualPhoto} uid={reply.uid}  />
+        {/each } 
+        {/if}
+        
+    </div>
 
 </div>

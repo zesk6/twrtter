@@ -16,6 +16,28 @@ export const load = (async ({ params }) => {
     if (!exists ){
         throw error(404, "this tweet does not currently have existence in this reality")
     }
+    const replyRef = collection(db, "replies")
+    const q2 = query(
+        replyRef, 
+        where('tweetID', '==', params.tweetId),
+        limit(25)
+    ) 
+
+    const snapshot2 = await getDocs(q2)
+    function getReplyData(){
+    if (snapshot2.docs[0]?.exists()){
+        let data = []
+        for(const reply of snapshot2.docs){
+            const replyData = reply.data()
+            data.push(replyData)
+            console.log(replyData)
+        }
+        return data
+    }
+    return [{}]
+    }
+    const allReplyData = getReplyData()
+
     return {
         text: data.text,
         uid: data.uid,
@@ -23,6 +45,6 @@ export const load = (async ({ params }) => {
         timestamp: data.timestamp,
         actualPhoto: data.ActualPhoto,
         tweetId: data.tweetId,
-        replys: data.replies
+        replys: allReplyData
     };
 }) satisfies PageLoad;
