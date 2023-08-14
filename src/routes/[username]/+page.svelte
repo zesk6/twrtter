@@ -2,16 +2,26 @@
     import type { PageData } from './$types';
     import defaultProfile from '$lib/pictures/anime.jpg' 
     import TweetShowArea from '$lib/components/tweetShowArea.svelte';
+    import defaultBanner from '$lib/pictures/lol.jpg'
+    import EditProfile from '$lib/components/editProfile.svelte';
+    import { scroll } from '$lib/firebase';
     export let data: PageData;
-
-
-
-    
-    let photo: any = null
+    let isEdit = false;
+    function openEdit(){
+        scroll.set(false)
+        isEdit = true
+    }
+    function exit(){
+        scroll.set(true)
+        isEdit = false;
+    }
 </script>
+<svelte:head>
+    <title>{data.username} | Twrtter</title>
+</svelte:head>
 
 <div >
-<div class="fixed flex items-center bg-black w-full z-50 ">
+<div class="fixed flex items-center bg-black w-full z-10 ">
     <a class="p-2 rounded-full bg-black hover:bg-gray-800 m-2 transition duration-100" href="/home">
         <svg viewBox="0 0 24 24" width="24px" height="24px" style="color: rgb(239, 243, 244);"><g><path d="M7.414 13l5.043 5.04-1.414 1.42L3.586 12l7.457-7.46 1.414 1.42L7.414 11H21v2H7.414z" fill="white"></path></g></svg>
     
@@ -19,19 +29,21 @@
     <span class="text-white font-bold text-xl ml-4">{data.username}</span>
 </div>
 <div class="w-full h-[200px]  bg-gray-600">
-    {#if photo}
-       <img src={photo} alt="who fucking cares"> 
-    {/if}
+    <img src={defaultBanner} alt="who fucking cares" height='200px' class="max-h-[200px] w-full"> 
 </div>
 <div class="rounded-full w-[120.67px] h-[120.67px] flex items-center justify-center top-[120px] left-[220px] bg-black absolute"> 
     <img src={data.photoUrl ?? defaultProfile } alt="profile" class="absolute w-[113.67px] h-[113.67px] bg-none rounded-full ">
 </div>
 <div class="w-full flex justify-end h-fit">
-    <a href="/edit" class="rounded-full bg-black text-md text-white border border-gray-700 hover:bg-gray-800
+    <button on:click={openEdit} class="rounded-full bg-black text-md text-white border border-gray-700 hover:bg-gray-800
      transition duration-150 p-[4px] m-2 align-end">
         Edit profile
-    </a>
+    </button>
 </div>
+{#if isEdit}
+    <EditProfile {exit} bio={data.bio} username={data.username} profilePic={data.photoUrl ?? defaultProfile }
+    uid={data.uid} />
+{/if}
 <h1 class="text-xl font-bold  ml-6 text-white">{data.username}</h1>
 <span class="text-sm block text-gray-400 ml-6 mb-2">{`@${data.handle}`}</span>
 <div class="text-sm text-white font-semibold ml-6 mb-2">{data.bio}</div>

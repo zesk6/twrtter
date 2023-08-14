@@ -70,7 +70,7 @@ export function docStore<T>(
 interface UserData {
   username: string;
   bio: string;
-  photoURL: string;
+  photoUrl: string;
   tweets: any[],
   handle: string,
   uid: string

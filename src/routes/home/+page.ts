@@ -1,6 +1,6 @@
 import type { PageLoad } from './$types';
 import { db } from '$lib/firebase'
-import { getDocs, query, limit, collection, orderBy } from 'firebase/firestore'
+import { getDocs, query, limit, collection, orderBy, doc, getDoc } from 'firebase/firestore'
 import type { QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
 
 export const load = (async () => {
@@ -24,9 +24,11 @@ export const load = (async () => {
     }
     // allTweetData is a [{ tweetid:jrkejrwerewrjlkewrjlewrjej }] an array of objects full of tweet properties
     const allTweetData = getTweetData(snapshot.docs)
+    
 
     return {
         tweetsss: allTweetData,
+        
        
     };
 } catch(error){

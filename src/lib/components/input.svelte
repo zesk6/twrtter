@@ -25,26 +25,18 @@
     }
     async function handleSubmit(e: any){
        const tweetRef = doc(db, 'tweets', tweeterID );
-       const userRef = doc(db, 'users', $user!.uid)
        const batch = writeBatch(db);
        batch.set(tweetRef,{
             uid: $userData?.uid,
             likes: 0,
-            UserphotoUrl: $userData?.photoURL ?? defaultProfile,
             ActualPhoto: fileUrl ?? null, 
             timestamp: new Date(),
             tweetId: tweeterID,
-            username: $userData?.username,
             handle: $userData?.handle,
             text: text,
             replys: []
 
        })
-       await updateDoc(userRef, {
-            tweets: arrayUnion({
-                tweetId: tweeterID
-            }),
-       }) 
        await batch.commit()
        text = "";
        previewURL = ''
@@ -67,8 +59,8 @@
 
 <div class='w-full  border-b border-gray-700 h-{`${beforeAfter}px`} flex pb-2'>
     <div class="p-2">
-        <img src={$page?.data?.photoUrl ?? defaultProfile} alt="no one cares"
-        class="w-[40px] rounded-full  ">
+        <img src={$userData?.photoUrl} alt="no one cares"
+        class="w-[40px] h-[40px] rounded-full  ">
     </div>
     <form on:submit|preventDefault={handleSubmit} class="w-[400px]" >
         <textarea maxlength="250" bind:value={text} on:input={handleInput} on:focus={() => visible = 100}

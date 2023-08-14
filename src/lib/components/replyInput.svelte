@@ -2,9 +2,9 @@
     import defaultProfile from '$lib/pictures/anime.jpg'
     import { userData, db, storage } from '$lib/firebase'
     import { uploadBytes, getDownloadURL, ref } from 'firebase/storage';
-    import { doc, writeBatch} from 'firebase/firestore'
+    import { doc, writeBatch, arrayUnion, updateDoc } from 'firebase/firestore'
+    import { page } from '$app/stores';
     //this is the most complex thing i've ever built, and completly unintelligeble even to myself
-
 
     export let tweetId: string;
     export let handle: string;
@@ -42,16 +42,19 @@
             likes: 0,
             text: Text,
             ActualPhoto: fileURL ?? null,
-            handle: $userData?.handle,
-            username: $userData?.username,
-            userPhotoUrl: $userData?.photoURL ?? defaultProfile,
-            timestamp: new Date()
+            timestamp: new Date(),
+            uid: $userData?.uid
 
         })
+      
         await batch.commit()
+        
         Text = ""
         previewURL = ""
         count = 0
+        setTimeout( exit, 500)
+        
+
     }
 
     
@@ -81,7 +84,7 @@
         <div class="flex flex-col">
             <div class="flex">
                 <div>
-                    <img src={$userData?.photoURL ?? defaultProfile} alt=" who fucking gives a fucking shit" class="w-[40px]
+                    <img src={$userData?.photoUrl ?? defaultProfile} alt=" who fucking gives a fucking shit" class="w-[40px]
                     rounded-full">
                 </div> 
                 <textarea bind:value={Text} on:change={check} id="replyarea" cols="30" rows="10" style="resize:none;" 

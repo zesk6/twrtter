@@ -19,11 +19,10 @@
 </script>
 {#if $scroll === false}
 <style>
-   html{
-        height: 100%;
-        overflow-y: hidden;
-   } 
-   
+   body {
+   height: 100%;
+   overflow-y: hidden;
+}
 </style>
 {/if}
 <div class="w-full min-w-screen bg-black flex px-[100px] h-full min-h-screen">
@@ -46,8 +45,8 @@
         <span class="absolute m-2 p-1 scale-0 transiton flex justify-end duration-200 group-hover:scale-100 origin-top
     bg-gray-500 text-white text-xs font-sans rounded bottom-10">post</span></button>
         <div class="mt-4 group hover:bg-gray-700 transition duration-100 rounded-full p-2 flex items-center justify-center">
-                <img src={ $userData?.photoURL ?? defaultProfile} 
-                alt="no one cares" class="w-[40px] rounded-full">
+                <img src={ $userData?.photoUrl ?? defaultProfile } 
+                alt="no one cares" class="w-[40px] h-[40px] rounded-full">
                 <div class="absolute scale-0 group-hover:scale-100 w-28 py-2 m-2 bg-black border-2 border-gray-400 rounded-xl
                 shadow transition duration-100 bottom-14 left-14">
                     <a href="/logout" class='flex justify-center hover:bg-gray-700 group transition duration-100 flex-col'>

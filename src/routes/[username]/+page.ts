@@ -41,6 +41,7 @@ export const load = (async ({ params }) => {
         photoUrl: data.photoUrl,
         handle: data.handle,
         bio: data.bio,
+        uid: data.uid,
         dateCreated: data.joinDate,
         allTweetdata: userAllTweetData.allTweetdata,
         hasTweets: userAllTweetData.exists
