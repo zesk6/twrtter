@@ -3,8 +3,8 @@
     import { onMount } from 'svelte';
     import { db } from '$lib/firebase';
     import { doc, getDoc, type DocumentData } from 'firebase/firestore'
-    import ReplyInput from '$lib/components/replyInput.svelte';
-    import LikeBtn from '$lib/components/likeBtn.svelte'
+    import ReplyInput from '$lib/components/tweets/replyInput.svelte';
+    import LikeBtn from '$lib/components/tweets/likeBtn.svelte'
     import { error } from '@sveltejs/kit';
 
 

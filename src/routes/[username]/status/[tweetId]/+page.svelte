@@ -1,15 +1,15 @@
 <script lang="ts">
     import type { PageData } from './$types';
     import defaultProfile  from '$lib/pictures/anime.jpg' 
-    import LikeBtn from '$lib/components/likeBtn.svelte';
-    import ReplyInput from '$lib/components/replyInput.svelte';
+    import LikeBtn from '$lib/components/tweets/likeBtn.svelte';
+    import ReplyInput from '$lib/components/tweets/replyInput.svelte';
     import type { DocumentData } from 'firebase/firestore';
     import { db } from '$lib/firebase'
     import { onMount } from 'svelte';
     import { doc, getDoc } from 'firebase/firestore'
     import { scroll } from '$lib/firebase';
     import { error } from '@sveltejs/kit';
-    import Reply from '$lib/components/reply.svelte';
+    import Reply from '$lib/components/tweets/reply.svelte';
     export let data: PageData;
     let isReply = false;
     let userData: DocumentData | undefined

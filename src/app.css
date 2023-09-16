@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+    .white-text{
+        @apply text-white font-semibold text-xl
+    }
+    .white-text2{
+        @apply text-white font-semibold text-3xl
+    }
+    .bord{
+        @apply border border-gray-700
+    }
+}

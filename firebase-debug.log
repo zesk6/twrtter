@@ -1,15 +1,36 @@
-[debug] [2023-08-14T07:41:48.910Z] ----------------------------------------------------------------------
-[debug] [2023-08-14T07:41:48.915Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\xueyi\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js login
-[debug] [2023-08-14T07:41:48.916Z] CLI Version:   12.4.7
-[debug] [2023-08-14T07:41:48.917Z] Platform:      win32
-[debug] [2023-08-14T07:41:48.918Z] Node Version:  v18.16.0
-[debug] [2023-08-14T07:41:48.920Z] Time:          Mon Aug 14 2023 15:41:48 GMT+0800 (China Standard Time)
-[debug] [2023-08-14T07:41:48.920Z] ----------------------------------------------------------------------
+[debug] [2023-08-16T04:27:43.469Z] ----------------------------------------------------------------------
+[debug] [2023-08-16T04:27:43.472Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\xueyi\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js login --no-localhost --debug
+[debug] [2023-08-16T04:27:43.473Z] CLI Version:   12.4.8
+[debug] [2023-08-16T04:27:43.473Z] Platform:      win32
+[debug] [2023-08-16T04:27:43.473Z] Node Version:  v18.16.0
+[debug] [2023-08-16T04:27:43.475Z] Time:          Wed Aug 16 2023 12:27:43 GMT+0800 (China Standard Time)
+[debug] [2023-08-16T04:27:43.475Z] ----------------------------------------------------------------------
 [debug] 
 [info] i  Firebase optionally collects CLI and Emulator Suite usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
  
+[info] i  To change your data collection preference at any time, run `firebase logout` and log in again. 
+[debug] [2023-08-16T04:27:46.002Z] >>> [apiv2][query] POST https://auth.firebase.tools/attest [none]
+[debug] [2023-08-16T04:27:46.004Z] >>> [apiv2][body] POST https://auth.firebase.tools/attest {"session_id":"f6b4ff20-dcb1-49a5-b348-fcc806c81c65"}
+[debug] [2023-08-16T04:27:46.732Z] <<< [apiv2][status] POST https://auth.firebase.tools/attest 200
+[debug] [2023-08-16T04:27:46.733Z] <<< [apiv2][body] POST https://auth.firebase.tools/attest {"token":"q0VzpDWtS6SX8hO0sZ2ucxMiW1vCl5xKSQdcG9OUXS8"}
 [info] 
-[info] Visit this URL on this device to log in:
-[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=387260784&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] To sign in to the Firebase CLI:
 [info] 
-[info] Waiting for authentication...
+[info] 1. Take note of your session ID:
+[info] 
+[info]    F6B4F
+[info] 
+[info] 2. Visit the URL below on any device and follow the instructions to get your code:
+[info] 
+[info]    https://auth.firebase.tools/login?code_challenge=6yNEuyJJwkxXKnWkRv88Xf9iR9e5gthSGg4vLMeZ4gk&session=f6b4ff20-dcb1-49a5-b348-fcc806c81c65&attest=q0VzpDWtS6SX8hO0sZ2ucxMiW1vCl5xKSQdcG9OUXS8
+[info] 
+[info] 3. Paste or enter the authorization code below once you have it:
+[info] 
+[debug] [2023-08-16T04:28:22.087Z] >>> [apiv2][query] POST https://accounts.google.com/o/oauth2/token [none]
+[debug] [2023-08-16T04:28:22.088Z] >>> [apiv2][body] POST https://accounts.google.com/o/oauth2/token [omitted]
+[debug] [2023-08-16T04:28:32.434Z] *** [apiv2] error from fetch(https://accounts.google.com/o/oauth2/token, {"headers":{},"method":"POST","body":{"_overheadLength":655,"_valueLength":287,"_valuesToMeasure":[],"writable":false,"readable":true,"dataSize":0,"maxDataSize":2097152,"pauseStreams":true,"_released":true,"_streams":[],"_currentStream":null,"_insideLoop":false,"_pendingNext":false,"_boundary":"--------------------------660417251565003746128330","_events":{},"_eventsCount":1}}): FetchError: request to https://accounts.google.com/o/oauth2/token failed, reason: Client network socket disconnected before secure TLS connection was established
+[debug] [2023-08-16T04:28:32.438Z] Token Fetch Error: FirebaseError: Failed to make request to https://accounts.google.com/o/oauth2/token
+    at RetryOperation._fn (C:\Users\xueyi\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:239:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Unable to authenticate using the provided code. Please try again.

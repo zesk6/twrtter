@@ -6,7 +6,7 @@
     import { db, storage } from '$lib/firebase'
     import { arrayUnion, doc, updateDoc, writeBatch } from 'firebase/firestore'
     import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-    import Image from '$lib/components/image.svelte'     
+    import Image from '$lib/components/auth/tweets/image.svelte'     
 
 
     let photo = false

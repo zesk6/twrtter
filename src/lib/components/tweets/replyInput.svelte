@@ -3,7 +3,6 @@
     import { userData, db, storage } from '$lib/firebase'
     import { uploadBytes, getDownloadURL, ref } from 'firebase/storage';
     import { doc, writeBatch, arrayUnion, updateDoc } from 'firebase/firestore'
-    import { page } from '$app/stores';
     //this is the most complex thing i've ever built, and completly unintelligeble even to myself
 
     export let tweetId: string;

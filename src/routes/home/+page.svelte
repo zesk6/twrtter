@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Input from '$lib/components/input.svelte';
-    import Tweet from '$lib/components/tweet.svelte';
+    import Input from '$lib/components/tweets/input.svelte';
+    import Tweet from '$lib/components/tweets/tweet.svelte';
     import type { PageData } from './$types';
 
 
